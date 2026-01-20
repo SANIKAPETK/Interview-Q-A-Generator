@@ -394,6 +394,19 @@ You are a professional interview coach.
 
 Generate exactly 4 interview questions WITH answers.
 
+STRICT OUTPUT FORMAT (MANDATORY):
+Q1. <question>
+A1. <answer>
+
+Q2. <question>
+A2. <answer>
+
+Q3. <question>
+A3. <answer>
+
+Q4. <question>
+A4. <answer>
+
 Strictly follow:
 - Category: {category}
 - Difficulty: {difficulty}
@@ -681,5 +694,6 @@ with st.container():
     # Clear Form
     st.divider()
     st.button("🧹 Clear Form", on_click=clear_and_reset)
+
 
     st.markdown('</div>', unsafe_allow_html=True)
