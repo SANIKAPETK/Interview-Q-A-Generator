@@ -1,3 +1,5 @@
 streamlit
-requests
+PyMuPDF
 google-generativeai
+fpdf
+pandas
