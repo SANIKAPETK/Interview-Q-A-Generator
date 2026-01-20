@@ -5,6 +5,7 @@ from datetime import datetime
 from fpdf import FPDF
 import time
 import hashlib
+import re
 
 # ---------------- Page Config ----------------
 st.set_page_config(
@@ -139,6 +140,35 @@ def call_gemini_with_retry(client, model, prompt, max_retries=4, cache_key=None)
                 raise e
     
     return None
+
+# ---------------- Format Q&A Output ----------------
+def format_qas_output(qas_text):
+    """Ensure proper formatting with blank lines between Q&A pairs"""
+    if not qas_text:
+        return qas_text
+    
+    # Clean up any extra spaces
+    qas_text = qas_text.strip()
+    
+    # Replace variations with standard format
+    replacements = [
+        (r'(?i)\bQ1[:\.\s]+', 'Q1. '),
+        (r'(?i)\bQ2[:\.\s]+', 'Q2. '),
+        (r'(?i)\bQ3[:\.\s]+', 'Q3. '),
+        (r'(?i)\bQ4[:\.\s]+', 'Q4. '),
+        (r'(?i)\bA1[:\.\s]+', '\nA1. '),
+        (r'(?i)\bA2[:\.\s]+', '\nA2. '),
+        (r'(?i)\bA3[:\.\s]+', '\nA3. '),
+        (r'(?i)\bA4[:\.\s]+', '\nA4. '),
+    ]
+    
+    for pattern, replacement in replacements:
+        qas_text = re.sub(pattern, replacement, qas_text)
+    
+    # Ensure double newlines between Q&A pairs
+    qas_text = re.sub(r'(A\d\. .*?)(?=Q\d\.)', r'\1\n\n', qas_text, flags=re.DOTALL)
+    
+    return qas_text
 
 # ---------------- Export Functions ----------------
 def export_to_text():
@@ -394,36 +424,40 @@ You are a professional interview coach.
 
 Generate exactly 4 interview questions WITH answers.
 
-STRICT OUTPUT FORMAT (MANDATORY):
-Q1. <question>
-A1. <answer>
+CRITICAL FORMATTING RULES - FOLLOW EXACTLY:
+1. Start each question with "Q1.", "Q2.", "Q3.", "Q4."
+2. Start each answer with "A1.", "A2.", "A3.", "A4."
+3. Put ONE blank line after each answer
+4. NO introductory text, NO concluding remarks, NO extra formatting
 
-Q2. <question>
-A2. <answer>
+EXACT OUTPUT FORMAT YOU MUST USE:
+Q1. <question text>
+A1. <detailed answer>
 
-Q3. <question>
-A3. <answer>
+Q2. <question text>
+A2. <detailed answer>
 
-Q4. <question>
-A4. <answer>
+Q3. <question text>
+A3. <detailed answer>
 
-Strictly follow:
+Q4. <question text>
+A4. <detailed answer>
+
+Interview Parameters:
 - Category: {category}
 - Difficulty: {difficulty}
 - Experience Level: {experience_level}
 
-Context:
 Job Role / JD:
 {job_or_jd}
 
 Resume Summary:
-{summary_text}
+{summary_text if summary_text else "Not provided"}
 
-Use numbered markdown.
-No intro or conclusion.
+Generate the 4 questions and answers now following the EXACT format shown above.
 """
     
-    cache_key = get_cache_key(f"qas_v2_{job_or_jd}_{summary_text}_{category}_{difficulty}_{experience_level}")
+    cache_key = get_cache_key(f"qas_v3_{job_or_jd}_{summary_text}_{category}_{difficulty}_{experience_level}")
 
     
     return call_gemini_with_retry(
@@ -627,6 +661,8 @@ with st.container():
                 )
                 
                 if qas:
+                    # Format the output to ensure proper spacing
+                    qas = format_qas_output(qas)
                     st.session_state["qas"] = qas
                     
                     history_entry = {
@@ -698,4 +734,3 @@ with st.container():
 
 
     st.markdown('</div>', unsafe_allow_html=True)
-
