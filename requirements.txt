@@ -1,0 +1,6 @@
+streamlit
+PyMuPDF
+google-genai
+fpdf
+pandas
+requests
