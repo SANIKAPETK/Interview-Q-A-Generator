@@ -423,7 +423,8 @@ Use numbered markdown.
 No intro or conclusion.
 """
     
-    cache_key = get_cache_key(f"qas_{job_or_jd}_{summary_text}_{category}_{difficulty}_{experience_level}")
+    cache_key = get_cache_key(f"qas_v2_{job_or_jd}_{summary_text}_{category}_{difficulty}_{experience_level}")
+
     
     return call_gemini_with_retry(
         client,
@@ -697,3 +698,4 @@ with st.container():
 
 
     st.markdown('</div>', unsafe_allow_html=True)
+
