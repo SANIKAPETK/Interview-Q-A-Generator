@@ -78,33 +78,54 @@ The Interview Q&A Generator is a comprehensive interview preparation platform th
 
 **Generated Questions:**
 ```
-Q1. Can you explain the difference between UI and UX design?
-A1. UI stands for User Interface, which focuses on the visual and interactive 
-elements of a product - essentially, how a product looks and feels. This includes 
-colors, typography, buttons, and layout. UX stands for User Experience, which is 
-about the overall journey and interaction a user has with a product...
-
-Q2. What is a wireframe, and why is it an important step in the UI/UX design process?
-A2. A wireframe is a low-fidelity visual representation of a page's layout, like a 
-blueprint. It outlines the content, structure, and functionality...
+Q1. What is machine learning?
+A1.Training machine to give solutions like humans.
 ```
 
 **Answer Evaluation:**
 ```
-SCORE: 7/10
-
-Breakdown:
-- Completeness: 2/3
-- Technical Accuracy: 3/4
-- Communication Clarity: 2/3
-
-Strengths:
-- Clear understanding of core concepts
-- Good use of examples
-
-Areas for Improvement:
-- Could elaborate more on practical applications
-- Add specific framework or methodology references
+   **Rating:** Very Low
+*   **Feedback:** The answer is extremely brief and only touches upon a single, high-level aspect of machine learning. It
+misses crucial components of a comprehensive definition, such as:
+    *   The role of **data** as the source of learning.
+    *   The process of identifying **patterns** or **rules**.
+    *   The use of **algorithms**.
+    *   The goal of **generalization** to new, unseen data.
+    *   The idea of learning **from experience** or examples without explicit programming for every specific outcome.
+### 2. Technical Accuracy
+*   **Rating:** Moderate
+*   **Feedback:**
+    *   "Training machine to give solutions" is fundamentally accurate in spirit; machine learning *does* involve training
+systems to solve problems.
+    *   However, "like humans" is an oversimplification and can be misleading. While Artificial Intelligence (of which ML is
+a subfield) often seeks to mimic human intelligence, not all machine learning explicitly aims to behave "like humans."
+Many ML applications focus on statistical pattern recognition, prediction, or optimization tasks that don't have a direct
+human analogy or aim. It also conflates ML with the broader goal of Artificial General Intelligence.
+### 3. Communication Clarity
+*   **Rating:** High
+*   **Feedback:** The answer is very clear, concise, and easy to understand. It uses simple language, which is a strong
+point.--
+### Score: 3/10
+### Feedback:
+The answer is commendable for its clarity and conciseness. You've captured a very high-level intuition that machine
+learning involves training systems to solve problems. However, it severely lacks the depth and key technical details
+expected in a definition of machine learning. The "like humans" part, while inspirational for AI in general, is an
+oversimplification for the vast field of machine learning and can be technically imprecise. For an interview, this answer
+would indicate a very basic, superficial understanding.
+### Improvements:
+1.  **Incorporate "Data":** Emphasize that machines learn *from data*.
+2.  **Mention "Patterns" or "Rules":** Explain that the learning process involves identifying patterns or rules within that
+data.
+3.  **Specify the Goal:** Clarify that the goal is often to make predictions, classifications, or decisions on *new, unseen
+data*.
+4.  **Differentiate from Traditional Programming:** Briefly explain that it's about learning from examples rather than
+explicit, hand-coded rules for every scenario.
+5.  **Refine "Like Humans":** Consider if this analogy is truly necessary for a core definition of ML. If you use it, qualify it
+carefully (e.g., "to perform tasks that traditionally require human intelligence").
+**Example of an improved answer:**
+"Machine learning is a field of artificial intelligence that enables systems to *learn from data* to identify patterns and
+make predictions or decisions, *without being explicitly programmed* for every specific task. Instead of following rigid
+instructions, these systems use algorithms to learn from examples and improve their performance over time."s
 ```
 
 ---
